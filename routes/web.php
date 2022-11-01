@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,26 +19,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+Route::post('/contact', ContactController::class)->name('contact');
 
-/* Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
- */
-
-Route::middleware(['auth','verified'])->group(function(){
-    Route::get('/dashboard',function(){
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::resource('skills',SkillController::class);
-    Route::resource('projects',ProjectController::class);
+
+    Route::resource('/skills', SkillController::class);
+    Route::resource('/projects', ProjectController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

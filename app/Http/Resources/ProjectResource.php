@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Skill;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
@@ -16,12 +15,11 @@ class ProjectResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'image'=>asset('/storage/'.$this->image),
-            'skill'=>new SkillResource($this->whenLoaded('skill')),
-            'project_url'=>$this->project_url,
-            'skill_name'=>$this->skill->name,
+            'id' => $this->id,
+            'name' => $this->name,
+            'image' => asset('/storage/' . $this->image),
+            'skill' => new SkillResource($this->whenLoaded('skill')),
+            'project_url' => $this->project_url,
         ];
     }
 }
