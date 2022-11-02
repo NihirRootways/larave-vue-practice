@@ -32,9 +32,9 @@ onMounted(() => {
       class="container flex flex-wrap justify-between items-center mx-auto"
       bis_skin_checked="1"
     >
-      <a href="https://laraveller.com/" class="flex items-center">
+      <a href="/" class="flex items-center">
         <img
-          src="http://portfolio.test/img/logo.png"
+          src="https://laravel.com/img/logotype.min.svg"
           class="mr-3 h-6 sm:h-9"
           alt="Laraveller Logo"
         />
@@ -46,7 +46,7 @@ onMounted(() => {
             whitespace-nowrap
             dark:text-white
           "
-          >Laraveller</span
+          ></span
         >
       </a>
       <button
