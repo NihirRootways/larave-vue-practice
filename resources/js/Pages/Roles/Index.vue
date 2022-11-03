@@ -1,15 +1,15 @@
 <template>
-  <Head title="Skills Index" />
+  <Head title="Roles Index" />
   <BreezeAuthenticatedLayout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Skills</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Roles</h2>
     </template>
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-end m-2 p-2">
           <Link
-            href="/skills/create"
+            href="/role/create"
             class="
               px-4
               py-2
@@ -18,7 +18,7 @@
               text-white
               rounded-md
             "
-            >New Skill</Link
+            >New Role</Link
           >
         </div>
 
@@ -37,14 +37,13 @@
               <tr>
                 <th scope="col" class="py-3 px-6">ID</th>
                 <th scope="col" class="py-3 px-6">Name</th>
-                <th scope="col" class="py-3 px-6">Image</th>
-                <th scope="col" class="py-3 px-6"></th>
+                <th scope="col" class="py-3 px-6">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="skill in skills.data"
-                :key="skill.id"
+                v-for="role in roles.data"
+                :key="role.id"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <th
@@ -58,20 +57,17 @@
                     dark:text-white
                   "
                 >
-                  {{ skill.id }}
+                  {{ role.id }}
                 </th>
-                <td class="py-4 px-6">{{ skill.name }}</td>
-                <td class="py-4 px-6">
-                  <img :src="skill.image" class="w-12 h-12 rounded-full" />
-                </td>
+                <td class="py-4 px-6">{{ role.name }}</td>
                 <td class="py-4 px-6">
                   <Link
-                    :href="route('skills.edit', skill.id)"
+                    :href="route('role.edit', role.id)"
                     class="font-medium text-blue-500 hover:text-blue-700 mr-2"
                     >Edit</Link
                   >
                   <Link
-                    :href="route('skills.destroy', skill.id)"
+                    :href="route('role.destroy', role.id)"
                     method="delete"
                     as="button"
                     type="button"
@@ -92,7 +88,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
-defineProps({
-  skills: Object,
+ defineProps({
+  roles: Object,
 });
 </script>
