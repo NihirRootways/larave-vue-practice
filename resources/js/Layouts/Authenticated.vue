@@ -12,164 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <link rel="stylesheet" href="/css/custom.css">
-    <nav class="bg-white border-b border-gray-100">
 
-        <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex">
-              <!-- Navigation Links -->
-
-            </div>
-
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-              <!-- Settings Dropdown -->
-              <div class="ml-3 relative">
-                <BreezeDropdown align="right" width="48">
-                  <template #trigger>
-                    <span class="inline-flex rounded-md">
-                      <button
-                        type="button"
-                        class="
-                          inline-flex
-                          items-center
-                          px-3
-                          py-2
-                          border border-transparent
-                          text-sm
-                          leading-4
-                          font-medium
-                          rounded-md
-                          text-gray-500
-                          bg-white
-                          hover:text-gray-700
-                          focus:outline-none
-                          transition
-                          ease-in-out
-                          duration-150
-                        "
-                      >
-                        {{ $page.props.auth.user.name }}
-
-                        <svg
-                          class="ml-2 -mr-0.5 h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </span>
-                  </template>
-
-                  <template #content>
-                    <BreezeDropdownLink
-                      :href="route('logout')"
-                      method="post"
-                      as="button"
-                    >
-                      Log Out
-                    </BreezeDropdownLink>
-                  </template>
-                </BreezeDropdown>
-              </div>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-              <button
-                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="
-                  inline-flex
-                  items-center
-                  justify-center
-                  p-2
-                  rounded-md
-                  text-gray-400
-                  hover:text-gray-500 hover:bg-gray-100
-                  focus:outline-none focus:bg-gray-100 focus:text-gray-500
-                  transition
-                  duration-150
-                  ease-in-out
-                "
-              >
-                <svg
-                  class="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    :class="{
-                      hidden: showingNavigationDropdown,
-                      'inline-flex': !showingNavigationDropdown,
-                    }"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                  <path
-                    :class="{
-                      hidden: !showingNavigationDropdown,
-                      'inline-flex': showingNavigationDropdown,
-                    }"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Responsive Navigation Menu -->
-        <div
-          :class="{
-            block: showingNavigationDropdown,
-            hidden: !showingNavigationDropdown,
-          }"
-          class="sm:hidden"
-        >
-          <div class="pt-2 pb-3 space-y-1">
-            <BreezeResponsiveNavLink
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
-            >
-              Dashboard
-            </BreezeResponsiveNavLink>
-          </div>
-
-          <!-- Responsive Settings Options -->
-          <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-              <div class="font-medium text-base text-gray-800">
-                {{ $page.props.auth.user.name }}
-              </div>
-              <div class="font-medium text-sm text-gray-500">
-                {{ $page.props.auth.user.email }}
-              </div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-              <BreezeResponsiveNavLink
-                :href="route('logout')"
-                method="post"
-                as="button"
-              >
-                Log Out
-              </BreezeResponsiveNavLink>
-            </div>
-          </div>
-        </div>
-      </nav>
       <div
       v-if="$page.props.flash.message"
       class="
@@ -187,6 +30,12 @@ const showingNavigationDropdown = ref(false);
   <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
   <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <ul class="space-y-2">
+        <li>
+            {{ $page.props.auth.user.name }}
+          </li>
+          <li>
+            {{ $page.props.auth.user.email }}
+          </li>
         <li>
             <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')" v-bind:class="route().current('dashboard') ? 'active' : ''"  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <!-- <svg aria-hidden="true" class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg> -->
@@ -220,6 +69,15 @@ const showingNavigationDropdown = ref(false);
                 <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap">Permissions</span>
             </BreezeNavLink>
+          </li>
+
+            <li>
+              <BreezeNavLink :href="route('logout')" method="post" as="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+              text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700
+              ">
+                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
+                  <span class="ml-3">Log Out</span>
+              </BreezeNavLink>
           </li>
       </ul>
   </div>
